@@ -12,17 +12,7 @@ typedef signed short int       s16;
 typedef signed long int        s32;
 typedef signed long long       s64;   
 
-/*	Unsigned Pointer Type	*/
-typedef unsigned char *	       pu8;
-typedef unsigned short int *   pu16;
-typedef unsigned long int *    pu32;
-typedef unsigned long long *   pu64;
 
-/*	Signed Pointer Type		*/
-typedef signed char *	        ps8;
-typedef signed short int *      ps16;
-typedef signed long int *       ps32;
-typedef signed long long *      ps64;
 
 /*	Float Type		*/
 typedef float                  f32;
