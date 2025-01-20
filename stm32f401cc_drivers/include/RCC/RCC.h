@@ -4,11 +4,35 @@
 #include "../COMMON/StdTypes.h"
 
 
-#define RCC_BASE 0x40023800U
+#define	RCC_enumCLK_NOTRDY 0xFFFBFFFF
+#define RCC_enumCLK_RDY    0xFFFFFFFF 
 
 
-#define RCC_PLL_EN_MSK 0x300000
-#define RCC_PLL_EN_MSK 0x300000
+#define RCC_APB1_PRE_DIV2	         (0x00001000) 
+#define RCC_APB1_PRE_DIV4	         (0x00001400) 
+#define RCC_APB1_PRE_DIV8	         (0x00001800) 
+#define RCC_APB1_PRE_DIV16	         (0x00001C00) 
+         
+#define RCC_APB2_PRE_DIV2	         (0x00008000) 
+#define RCC_APB2_PRE_DIV4	         (0x0000A000) 
+#define RCC_APB2_PRE_DIV8	         (0x0000C000) 
+#define RCC_APB2_PRE_DIV16	         (0x0000E000) 
+         
+#define RCC_AHB_PRE_DIV2	         (0x00000080)	
+#define RCC_AHB_PRE_DIV4	         (0x00000090)	
+#define RCC_AHB_PRE_DIV8	         (0x000000A0)	
+#define RCC_AHB_PRE_DIV16	         (0x000000B0)	
+#define RCC_AHB_PRE_DIV64	         (0x000000C0)	
+#define RCC_AHB_PRE_DIV128	         (0x000000D0)	
+#define RCC_AHB_PRE_DIV256	         (0x000000E0)	
+#define RCC_AHB_PRE_DIV512	         (0x000000F0)	
+
+
+
+
+
+
+
 
 typedef struct{
 	volatile u32 RCC_CR ;
@@ -39,79 +63,79 @@ typedef struct{
 	volatile u32 RCC_PLLI2SCFGR ;
 	volatile u32 RESERVER6 ;/*reserved*/
 	volatile u32 RCC_DCKCFGR;
-}RCC_REG_type;
+}RCC_strREG_type;
 
 
-#define RCC ((RCC_REG_type *)(RCC_BASE))
+#define RCC ((RCC_strREG_type *)(RCC_BASE))
 
 
 
 typedef enum{
-	RCC_enuHSI_CLOCK =0,
-	RCC_enuHSE_CLOCK,
-	RCC_enuPLL_CLOCK 
+	RCC_enumHSI_CLOCK =0,
+	RCC_enumHSE_CLOCK,
+	RCC_enumPLL_CLOCK 
 }RCC_enumSetClk_Source_t;
 
 
 typedef enum{
-	RCC_enuCLK_OFF=0, 
-	RCC_enuCLK_ON
+	RCC_enumCLK_OFF=0, 
+	RCC_enumCLK_ON
 }RCC_enumSetClk_Status_t;
 
-typedef enum{
-	RCC_enuCLK_NOTRDY = 0x00,
-	RCC_enuCLK_RDY    = 0x01 
-}RCC_enumREADYStatus_t;
+
 
 typedef enum{
-	RCC_enuCLK_BYPASS_ON     = 0,
-	RCC_enuCLK_BYPASS_OFF    = 1 
+	RCC_enumCLK_BYPASS_OFF    = 0,
+	RCC_enumCLK_BYPASS_ON    
 }RCC_enumHSE_BYPASS_Status_t;
 
 
 typedef enum{
-	RCC_enuOk = 0,
-	RCC_enuErrorClock,
-	RCC_enuErrorClkNotRdy,
-	RCC_enuErrorContrlStatus,
-	RCC_enuErrorSelectedSysClk,
-	RCC_enuErrorNullPointer,
-	RCC_enuErrorPLLON,
-	RCC_enuErrorMDivion,
-	RCC_enuErrorNFactor,
-	RCC_enuErrorPLLP,
-	RCC_enuErrorPLLQ,
-	RCC_enuErrorBus,
-	RCC_enuErrorTimedOut,
-	RCC_enuErrorBusPrescaler,
-	RCC_enuErrorSelectedPllClk
+	RCC_enumOk = 0,
+	RCC_enumErrorClock,
+	RCC_enumErrorClkNotRdy,
+	RCC_enumErrorSetClkStatus,
+	RCC_enumErrorSelectSysClk,
+	RCC_enumErrorNullPointer,
+	RCC_enumErrorPLLON,
+	RCC_enumErrorPLL_MDivFactor,
+	RCC_enumErrorPLL_NMulFactor,
+	RCC_enumErrorPLL_PDivFactor,
+	RCC_enumErrorPLL_QDivFactor,
+	RCC_enumErrorHSEBYPASS,
+	RCC_enumErrorBus,
+	RCC_enumErrorTimedOut,
+	RCC_enumErrorBusPrescaler,
+	RCC_enumErrorSelectPllClk
 }RCC_enumErrorStatus_t;
 
 
 typedef enum{
-	RCC_enu_P_DivBy2,
-	RCC_enu_P_DivBy4,
-	RCC_enu_P_DivBy6,
-	RCC_enu_P_DivBy8
+	RCC_enum_P_DivBy2,
+	RCC_enum_P_DivBy4,
+	RCC_enum_P_DivBy6,
+	RCC_enum_P_DivBy8
 }RCC_enumPLL_P_t;
 
 
 typedef enum{
-	RCC_enu_Q_DivBy2,
-	RCC_enu_Q_DivBy3,
-	RCC_enu_Q_DivBy4,
-	RCC_enu_Q_DivBy5,
-	RCC_enu_Q_DivBy6,
-	RCC_enu_Q_DivBy7,
-	RCC_enu_Q_DivBy8,
-	RCC_enu_Q_DivBy9,
-	RCC_enu_Q_DivBy10,
-	RCC_enu_Q_DivBy11,
-	RCC_enu_Q_DivBy12,
-	RCC_enu_Q_DivBy13,
-	RCC_enu_Q_DivBy14,
-	RCC_enu_Q_DivBy15
+	RCC_enum_Q_DivBy2,
+	RCC_enum_Q_DivBy3,
+	RCC_enum_Q_DivBy4,
+	RCC_enum_Q_DivBy5,
+	RCC_enum_Q_DivBy6,
+	RCC_enum_Q_DivBy7,
+	RCC_enum_Q_DivBy8,
+	RCC_enum_Q_DivBy9,
+	RCC_enum_Q_DivBy10,
+	RCC_enum_Q_DivBy11,
+	RCC_enum_Q_DivBy12,
+	RCC_enum_Q_DivBy13,
+	RCC_enum_Q_DivBy14,
+	RCC_enum_Q_DivBy15
 }RCC_enumPLL_Q_t;
+
+
 
 
 typedef struct{
@@ -127,9 +151,6 @@ typedef struct{
 #define    RCC_AHB2ENR_REG  (0x0000000200000000ULL) // AHB2ENR register
 #define    RCC_APB1ENR_REG  (0x0000000300000000ULL) // APB1ENR register
 #define    RCC_APB2ENR_REG  (0x0000000400000000ULL) // APB2ENR register
-
-
-
     
 // Peripheral bits (lower 32 bits)
 #define    RCC_AHB1ENR_GPIOAEN  (RCC_AHB1ENR_REG | 0x00000001)  // GPIOA clock enable
@@ -175,29 +196,18 @@ typedef struct{
 */
 /*===========================================================*/
 
-RCC_enumErrorStatus_t RCC_SetClk_Status (RCC_enumSetClk_Source_t source ,RCC_enumSetClk_Status_t status );
-
-RCC_enumErrorStatus_t RCC_enuControlSysClock(RCC_enumSetClk_Source_t source);
-
-RCC_enumErrorStatus_t RCC_enuGetClockRdyStatus(RCC_enumSetClk_Source_t source , pu8 Add_pu8RtrnRdyStatus);
-
-RCC_enumErrorStatus_t RCC_PLLConfig(RCC_strPLLConfig_t Copy_strPLLConfig_t );
-
-RCC_enumErrorStatus_t RCC_EnableClock(u64 peripheral) ;
-RCC_enumErrorStatus_t RCC_DisableClock(u64 peripheral);
 
 
+RCC_enumErrorStatus_t RCC_enuControlSysClock(RCC_enumSetClk_Source_t Copy_enumSource);
+RCC_enumErrorStatus_t RCC_enuSetClock_Status(RCC_enumSetClk_Source_t Copy_enumSource, RCC_enumSetClk_Status_t Copy_enumStatus);
+RCC_enumErrorStatus_t RCC_enuPLLConfig(RCC_strPLLConfig_t Copy_strPLLConfig_t);
+RCC_enumErrorStatus_t RCC_enuEnableClock(u64 Copy_u8peripheral);
+RCC_enumErrorStatus_t RCC_enuDisableClock(u64 Copy_u8peripheral);
+RCC_enumErrorStatus_t RCC_enuGetClkReadyStatus(RCC_enumSetClk_Source_t Copy_enumSource, u8 *Add_pu8ReadyStatus);
+RCC_enumErrorStatus_t RCC_enuConfigurePreScalarLowSpeedAPB(u32 Copy_u8APB1_Prescalar);
+RCC_enumErrorStatus_t RCC_enuConfigurePreScalarHighSpeedAPB(u32 Copy_u32APB2_Prescalar);
+RCC_enumErrorStatus_t RCC_enuConfigurePreScalarAHB(u32 Copy_u32AHB_Prescalar) ;
+RCC_enumErrorStatus_t RCC_enuHES_BYPASS_Status(u32 Copy_u32Bypass_status);
 
-// RCC_enumErrorStatus_t RCC_AHB1EnableClock(RCC_enumAHB1ENR_Bits_t Copy_enumAHB1_peripheral);
-// RCC_enumErrorStatus_t RCC_AHB1DisableClock(RCC_enumAHB1ENR_Bits_t Copy_enumAHB1_peripheral);
-// RCC_enumErrorStatus_t RCC_AHB2EnableClock(RCC_enumAHB2ENR_Bits_t Copy_enumAHB2_peripheral);
-// RCC_enumErrorStatus_t RCC_AHB2DisableClock(RCC_enumAHB2ENR_Bits_t Copy_enumAHB2_peripheral);
-
-// RCC_enumErrorStatus_t RCC_APB1EnableClock(RCC_enumAPB1ENR_Bits_t Copy_enumAPB1_peripheral);
-// RCC_enumErrorStatus_t RCC_APB1DisableClock(RCC_enumAPB1ENR_Bits_t Copy_enumAPB1_peripheral);
-
-
-// RCC_enumErrorStatus_t RCC_APB2EnableClock(RCC_enumAPB2ENR_Bits_t Copy_enumAPB2_peripheral);
-// RCC_enumErrorStatus_t RCC_APB2DisableClock(RCC_enumAPB2ENR_Bits_t Copy_enumAPB2_peripheral);
 
 #endif /*RCC_H*/

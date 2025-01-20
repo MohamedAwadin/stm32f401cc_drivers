@@ -1,10 +1,29 @@
 #ifndef RCC_PRIVATE_H_
 #define RCC_PRIVATE_H_
 
+#define RCC_BASE 0x40023800U
+
+#define RCC_PLLON_CFGR_BITMUSK_  			(0x1000000)
+#define RCC_PLLRDY_CFGR_BITMUSK_ 			(0x2000000)
+#define RCC_PLLSRC_PLLCFGR_BITMUSK_ 		(0x400000)
 
 
-#define RCC_PLLON_CFGR_BITMUSK_  ((u32) 0x01000000)
-#define RCC_PLLRDY_CFGR_BITMUSK_ ((u32) 0x02000000)
+#define RCC_HSION_CR_BITMUSK_				(0x00000001)
+#define RCC_HSIRDY_CR_BITMUSK_				(0x00000002)
+#define RCC_HSEON_CR_BITMUSK_				(0x00010000)
+#define RCC_HSERDY_CR_BITMUSK_				(0x00020000)
+#define RCC_PLLON_CR_BITMUSK_				(0x01000000)
+#define RCC_PLLRDY_CR_BITMUSK_				(0x02000000)
+
+#define RCC_APB1_CFGR_BITMASK_	            (0X00001C00) 
+#define RCC_APB2_CFGR_BITMASK_	            (0x0000E000) 
+#define RCC_AHB_CFGR_BITMASK_	            (0x000000F0) 
+#define RCC_HSEBYP_CR_BITMASK_	            (0x00040000) 
+
+
+#define RCC_RSTSW_CFGR_BITMUSK_		        (0xFFFFFFFC)
+#define RCC_SWS_CFGR_BITMUSK_				(0x0000000C)
+
 
 
 
@@ -115,31 +134,25 @@ enum{
  *		RCC PLL configuration register (RCC_PLLCFGR) PINS	   *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 typedef enum {
-    RCC_PLLCFGR_PLLM_0  = 0,  // PLLM bit 0
-    RCC_PLLCFGR_PLLM_1  ,  // PLLM bit 1
-    RCC_PLLCFGR_PLLM_2  ,  // PLLM bit 2
-    RCC_PLLCFGR_PLLM_3  ,  // PLLM bit 3
-    RCC_PLLCFGR_PLLM_4  ,  // PLLM bit 4
-    RCC_PLLCFGR_PLLM_5  ,  // PLLM bit 5
+    RCC_PLLCFGR_PLLM_0     = 0,  // PLLM bit 0
+    RCC_PLLCFGR_PLLM_1     ,  // PLLM bit 1
+    RCC_PLLCFGR_PLLM_2     ,  // PLLM bit 2
+    RCC_PLLCFGR_PLLM_3     ,  // PLLM bit 3
+    RCC_PLLCFGR_PLLM_4     ,  // PLLM bit 4
+    RCC_PLLCFGR_PLLM_5     ,  // PLLM bit 5
 
-    RCC_PLLCFGR_PLLN_0  ,  // PLLN bit 0
-    RCC_PLLCFGR_PLLN_1  ,  // PLLN bit 1
-    RCC_PLLCFGR_PLLN_2  ,  // PLLN bit 2
-    RCC_PLLCFGR_PLLN_3  ,  // PLLN bit 3
-    RCC_PLLCFGR_PLLN_4  ,  // PLLN bit 4
-    RCC_PLLCFGR_PLLN_5  ,  // PLLN bit 5
-    RCC_PLLCFGR_PLLN_6  ,  // PLLN bit 6
-    RCC_PLLCFGR_PLLN_7  ,  // PLLN bit 7
-    RCC_PLLCFGR_PLLN_8  ,  // PLLN bit 8
-    RCC_PLLCFGR_PLLN_9  ,  // PLLN bit 9
-    RCC_PLLCFGR_PLLN_10 ,  // PLLN bit 10
-    RCC_PLLCFGR_PLLN_11 ,  // PLLN bit 11
-    RCC_PLLCFGR_PLLN_12 ,  // PLLN bit 12
-    RCC_PLLCFGR_PLLN_13 ,  // PLLN bit 13
-    RCC_PLLCFGR_PLLN_14 ,  // PLLN bit 14
+    RCC_PLLCFGR_PLLN_0     ,  // PLLN bit 0
+    RCC_PLLCFGR_PLLN_1     ,  // PLLN bit 1
+    RCC_PLLCFGR_PLLN_2     ,  // PLLN bit 2
+    RCC_PLLCFGR_PLLN_3     ,  // PLLN bit 3
+    RCC_PLLCFGR_PLLN_4     ,  // PLLN bit 4
+    RCC_PLLCFGR_PLLN_5     ,  // PLLN bit 5
+    RCC_PLLCFGR_PLLN_6     ,  // PLLN bit 6
+    RCC_PLLCFGR_PLLN_7     ,  // PLLN bit 7
+    RCC_PLLCFGR_PLLN_8     ,  // PLLN bit 8
 
-    RCC_PLLCFGR_PLLP_0  ,  // PLLP bit 0
-    RCC_PLLCFGR_PLLP_1  ,  // PLLP bit 1
+    RCC_PLLCFGR_PLLP_0=16  ,  // PLLP bit 0
+    RCC_PLLCFGR_PLLP_1     ,  // PLLP bit 1
 
     RCC_PLLCFGR_PLLSRC  = 22,  // PLLSRC bit (22)
 
