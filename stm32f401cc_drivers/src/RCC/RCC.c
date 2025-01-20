@@ -303,31 +303,31 @@ RCC_enumErrorStatus_t RCC_enuGetClkReadyStatus(RCC_enumSetClk_Source_t Copy_enum
         case RCC_enumHSI_CLOCK:
             if (RCC->RCC_CR & RCC_HSIRDY_CR_BITMUSK_)
             {
-                *Add_pu8ReadyStatus = RCC_enumCLK_RDY;
+                *Add_pu8ReadyStatus = RCC_CLK_RDY;
             }
             else
             {
-                *Add_pu8ReadyStatus = RCC_enumCLK_NOTRDY;
+                *Add_pu8ReadyStatus = RCC_CLK_NOTRDY;
             }
             break;
         case RCC_enumHSE_CLOCK:
             if (RCC->RCC_CR & RCC_HSERDY_CR_BITMUSK_)
             {
-                *Add_pu8ReadyStatus = RCC_enumCLK_RDY;
+                *Add_pu8ReadyStatus = RCC_CLK_RDY;
             }
             else
             {
-                *Add_pu8ReadyStatus = RCC_enumCLK_NOTRDY;
+                *Add_pu8ReadyStatus = RCC_CLK_NOTRDY;
             }
             break;
         case RCC_enumPLL_CLOCK:
             if (RCC->RCC_CR & RCC_PLLRDY_CR_BITMUSK_)
             {
-                *Add_pu8ReadyStatus = RCC_enumCLK_RDY;
+                *Add_pu8ReadyStatus = RCC_CLK_RDY;
             }
             else
             {
-                *Add_pu8ReadyStatus = RCC_enumCLK_NOTRDY;
+                *Add_pu8ReadyStatus = RCC_CLK_NOTRDY;
             }
             break;
         }

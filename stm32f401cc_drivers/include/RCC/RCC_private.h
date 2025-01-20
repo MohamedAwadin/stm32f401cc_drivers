@@ -1,6 +1,8 @@
 #ifndef RCC_PRIVATE_H_
 #define RCC_PRIVATE_H_
 
+
+// RCC Base Address
 #define RCC_BASE 0x40023800U
 
 // Register identifiers (upper 32 bits)
@@ -42,7 +44,7 @@
 
 #define RCC_PLL_M_MAX 			 63
 #define RCC_PLL_M_MIN 			 2
-#define RCC_u16TIME_OUT		    (500)
+#define RCC_u16TIME_OUT		    (u16)(500)
 
 #define RCC_CFGR_SW01_SHIFT	  	0x3				
 #define RCC_CFGR_SW_SHIFT	  	0x1				
@@ -50,127 +52,123 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *		Clock control register (RCC_CR_) PINS			   *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-enum{
-	RCC_CR_HSION=0,
-	RCC_CR_HSIRDY,
-	RCC_CR_HSITRIM0=3,
-	RCC_CR_HSITRIM1,
-	RCC_CR_HSITRIM2,
-	RCC_CR_HSITRIM3,
-	RCC_CR_HSITRIM4,
-	RCC_CR_HSICAL0,
-	RCC_CR_HSICAL1,
-	RCC_CR_HSICAL2,
-	RCC_CR_HSICAL3,
-	RCC_CR_HSICAL4,
-	RCC_CR_HSICAL5,
-	RCC_CR_HSICAL6,
-	RCC_CR_HSICAL7,
-	RCC_CR_HSEON,
-	RCC_CR_HSERDY,
-	RCC_CR_HSEBYP,
-	RCC_CR_CSSON,
-	RCC_CR_PLLON = 24,
-	RCC_CR_PLLRDY,
-	RCC_CR_PLLI2SON , 
-	RCC_CR_PLLI2SRDY
-}RCC_CR_Bits;
+
+#define 	RCC_CR_HSION		(u8)(0)
+#define 	RCC_CR_HSIRDY		(u8)(1)
+#define 	RCC_CR_HSITRIM0		(u8)(3)
+#define 	RCC_CR_HSITRIM2		(u8)(4)	
+#define 	RCC_CR_HSITRIM3		(u8)(5)	
+#define 	RCC_CR_HSITRIM1		(u8)(6)	
+#define 	RCC_CR_HSITRIM4		(u8)(7)	
+#define 	RCC_CR_HSICAL0      (u8)(8)
+#define 	RCC_CR_HSICAL1		(u8)(9)
+#define 	RCC_CR_HSICAL2		(u8)(10)
+#define 	RCC_CR_HSICAL3      (u8)(11)
+#define 	RCC_CR_HSICAL4		(u8)(12)
+#define 	RCC_CR_HSICAL5		(u8)(13)
+#define 	RCC_CR_HSICAL6		(u8)(14)
+#define 	RCC_CR_HSICAL7   	(u8)(15)
+#define 	RCC_CR_HSEON		(u8)(16)
+#define 	RCC_CR_HSERDY		(u8)(17)
+#define 	RCC_CR_HSEBYP		(u8)(18)
+#define 	RCC_CR_CSSON		(u8)(19)
+#define 	RCC_CR_PLLON        (u8)(24)
+#define 	RCC_CR_PLLRDY 		(u8)(25)
+#define 	RCC_CR_PLLI2SON  	(u8)(26)
+#define 	RCC_CR_PLLI2SRDY 	(u8)(27)
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *		Clock configuration register (RCC_CFGR_) PINS	   *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-enum{
-	RCC_CFGR_SW0			=0,
-	RCC_CFGR_SW1			=1,
-	RCC_CFGR_SWS0		=2,
-	RCC_CFGR_SWS1		=3,
-	RCC_CFGR_HPRE0		=4,
-	RCC_CFGR_HPRE1		=5,
-	RCC_CFGR_HPRE2		=6,
-	RCC_CFGR_HPRE3		=7,
-	RCC_CFGR_PPRE1_0		=10,
-	RCC_CFGR_PPRE1_1		=11,
-	RCC_CFGR_PPRE1_2		=12,
-	RCC_CFGR_PPRE2_0		=13,
-	RCC_CFGR_PPRE2_1		=14,
-	RCC_CFGR_PPRE2_2		=15,
-	RCC_CFGR_RTCPRE_0 	=16,
-	RCC_CFGR_RTCPRE_1 	=17,
-	RCC_CFGR_RTCPRE_2    =18,
-	RCC_CFGR_RTCPRE_3    =19,
-	RCC_CFGR_RTCPRE_4    =20,
-	RCC_CFGR_MCO1_0      =21,
-	RCC_CFGR_MCO1_1      =22,
-	RCC_CFGR_I2SSRC      =23,
-	RCC_CFGR_MCO1PRE_0   =24,
-	RCC_CFGR_MCO1PRE_1   =25,
-	RCC_CFGR_MCO1PRE_2   =26,
-	RCC_CFGR_MCO2PRE_0   =27,
-	RCC_CFGR_MCO2PRE_1   =28,
-	RCC_CFGR_MCO2PRE_2   =29,
-	RCC_CFGR_MCO2_0   	=30,
-	RCC_CFGR_MCO2_1   	=31	
-}RCC_CFGR_Bits;
+
+#define 	RCC_CFGR_SW0			(u8)(0 ) 
+#define 	RCC_CFGR_SW1			(u8)(1 ) 
+#define 	RCC_CFGR_SWS0			(u8)(2 ) 
+#define 	RCC_CFGR_SWS1			(u8)(3 ) 
+#define 	RCC_CFGR_HPRE0			(u8)(4 ) 
+#define 	RCC_CFGR_HPRE1			(u8)(5 ) 
+#define 	RCC_CFGR_HPRE2			(u8)(6 ) 
+#define 	RCC_CFGR_HPRE3			(u8)(7 ) 
+#define 	RCC_CFGR_PPRE1_0		(u8)(10)
+#define 	RCC_CFGR_PPRE1_1		(u8)(11)
+#define 	RCC_CFGR_PPRE1_2		(u8)(12)
+#define 	RCC_CFGR_PPRE2_0		(u8)(13)
+#define 	RCC_CFGR_PPRE2_1		(u8)(14)
+#define 	RCC_CFGR_PPRE2_2		(u8)(15)
+#define 	RCC_CFGR_RTCPRE_0 		(u8)(16)
+#define 	RCC_CFGR_RTCPRE_1 		(u8)(17)
+#define 	RCC_CFGR_RTCPRE_2    	(u8)(18)
+#define 	RCC_CFGR_RTCPRE_3    	(u8)(19)
+#define 	RCC_CFGR_RTCPRE_4    	(u8)(20)
+#define 	RCC_CFGR_MCO1_0      	(u8)(21)
+#define 	RCC_CFGR_MCO1_1      	(u8)(22)
+#define 	RCC_CFGR_I2SSRC      	(u8)(23)
+#define 	RCC_CFGR_MCO1PRE_0   	(u8)(24)
+#define 	RCC_CFGR_MCO1PRE_1   	(u8)(25)
+#define 	RCC_CFGR_MCO1PRE_2   	(u8)(26)
+#define 	RCC_CFGR_MCO2PRE_0   	(u8)(27)
+#define 	RCC_CFGR_MCO2PRE_1   	(u8)(28)
+#define 	RCC_CFGR_MCO2PRE_2   	(u8)(29)
+#define 	RCC_CFGR_MCO2_0   		(u8)(30)
+#define 	RCC_CFGR_MCO2_1   		(u8)(31)	
+
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *		Clock interrupt register (RCC_CIR_) PINS	           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-enum{
-	RCC_CIR_LSIRDYF			=0,
-	RCC_CIR_LSERDYF			=1,
-	RCC_CIR_HSIRDYF			=2,
-	RCC_CIR_HSERDYF			=3,
-	RCC_CIR_PLLRDYF			=4,
-	RCC_CIR_PLLI2SRDYF		=5,
-	RCC_CIR_CSSF 			=7,
-	RCC_CIR_LSIRDYIE		=8,
-	RCC_CIR_LSERDYIE		=9,
-	RCC_CIR_HSIRDYIE		=10,
-	RCC_CIR_HSERDYIE		=11,
-	RCC_CIR_PLLRDYIE		=12,
-	RCC_CIR_PLLI2SRDYIE		=13,
-	RCC_CIR_LSIRDYC 		= 16,
-	RCC_CIR_LSERDYC 		= 17,
-	RCC_CIR_HSIRDYC 		= 18,
-	RCC_CIR_HSERDYC 		= 19,
-	RCC_CIR_PLLRDYC 		= 20,
-	RCC_CIR_PLLI2SRDYC 		= 21,
-	RCC_CIR_CSSC 			= 23
-}RCC_CIR_Bits;
+
+#define 	RCC_CIR_LSIRDYF			(u8)(0)
+#define 	RCC_CIR_LSERDYF			(u8)(1)
+#define 	RCC_CIR_HSIRDYF			(u8)(2)
+#define 	RCC_CIR_HSERDYF			(u8)(3)
+#define 	RCC_CIR_PLLRDYF			(u8)(4)
+#define 	RCC_CIR_PLLI2SRDYF		(u8)(5)
+#define 	RCC_CIR_CSSF 			(u8)(7)
+#define 	RCC_CIR_LSIRDYIE		(u8)(8)
+#define 	RCC_CIR_LSERDYIE		(u8)(9)
+#define 	RCC_CIR_HSIRDYIE		(u8)(10)
+#define 	RCC_CIR_HSERDYIE		(u8)(11)
+#define 	RCC_CIR_PLLRDYIE		(u8)(12)
+#define 	RCC_CIR_PLLI2SRDYIE		(u8)(13)
+#define 	RCC_CIR_LSIRDYC 		(u8)(16)
+#define 	RCC_CIR_LSERDYC 		(u8)(17)
+#define 	RCC_CIR_HSIRDYC 		(u8)(18)
+#define 	RCC_CIR_HSERDYC 		(u8)(19)
+#define 	RCC_CIR_PLLRDYC 		(u8)(20)
+#define 	RCC_CIR_PLLI2SRDYC 		(u8)(21)
+#define 	RCC_CIR_CSSC 			(u8)(23)
+
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *		RCC PLL configuration register (RCC_PLLCFGR) PINS	   *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-typedef enum {
-    RCC_PLLCFGR_PLLM_0     = 0,  // PLLM bit 0
-    RCC_PLLCFGR_PLLM_1     ,  // PLLM bit 1
-    RCC_PLLCFGR_PLLM_2     ,  // PLLM bit 2
-    RCC_PLLCFGR_PLLM_3     ,  // PLLM bit 3
-    RCC_PLLCFGR_PLLM_4     ,  // PLLM bit 4
-    RCC_PLLCFGR_PLLM_5     ,  // PLLM bit 5
 
-    RCC_PLLCFGR_PLLN_0     ,  // PLLN bit 0
-    RCC_PLLCFGR_PLLN_1     ,  // PLLN bit 1
-    RCC_PLLCFGR_PLLN_2     ,  // PLLN bit 2
-    RCC_PLLCFGR_PLLN_3     ,  // PLLN bit 3
-    RCC_PLLCFGR_PLLN_4     ,  // PLLN bit 4
-    RCC_PLLCFGR_PLLN_5     ,  // PLLN bit 5
-    RCC_PLLCFGR_PLLN_6     ,  // PLLN bit 6
-    RCC_PLLCFGR_PLLN_7     ,  // PLLN bit 7
-    RCC_PLLCFGR_PLLN_8     ,  // PLLN bit 8
+#define    RCC_PLLCFGR_PLLM_0       (u8)(0) 
+#define    RCC_PLLCFGR_PLLM_1       (u8)(1)
+#define    RCC_PLLCFGR_PLLM_2       (u8)(2)
+#define    RCC_PLLCFGR_PLLM_3       (u8)(3)
+#define    RCC_PLLCFGR_PLLM_4       (u8)(4)
+#define    RCC_PLLCFGR_PLLM_5       (u8)(5)
+#define    RCC_PLLCFGR_PLLN_0       (u8)(6)
+#define    RCC_PLLCFGR_PLLN_1       (u8)(7)
+#define    RCC_PLLCFGR_PLLN_2       (u8)(8)
+#define    RCC_PLLCFGR_PLLN_3       (u8)(9)
+#define    RCC_PLLCFGR_PLLN_4       (u8)(10)
+#define    RCC_PLLCFGR_PLLN_5       (u8)(11)
+#define    RCC_PLLCFGR_PLLN_6       (u8)(12)
+#define    RCC_PLLCFGR_PLLN_7       (u8)(13)
+#define    RCC_PLLCFGR_PLLN_8       (u8)(14)
+#define    RCC_PLLCFGR_PLLP_0       (u8)(16)  
+#define    RCC_PLLCFGR_PLLP_1       (u8)(17)     
+#define    RCC_PLLCFGR_PLLSRC       (u8)(22)
+#define    RCC_PLLCFGR_PLLQ_0       (u8)(24)
+#define    RCC_PLLCFGR_PLLQ_1       (u8)(25)
+#define    RCC_PLLCFGR_PLLQ_2       (u8)(26)
+#define    RCC_PLLCFGR_PLLQ_3       (u8)(27)
 
-    RCC_PLLCFGR_PLLP_0=16  ,  // PLLP bit 0
-    RCC_PLLCFGR_PLLP_1     ,  // PLLP bit 1
-
-    RCC_PLLCFGR_PLLSRC  = 22,  // PLLSRC bit (22)
-
-    RCC_PLLCFGR_PLLQ_0  = 24,  // PLLQ bit 0
-    RCC_PLLCFGR_PLLQ_1  ,  // PLLQ bit 1
-    RCC_PLLCFGR_PLLQ_2  ,  // PLLQ bit 2
-    RCC_PLLCFGR_PLLQ_3  ,  // PLLQ bit 3
-} RCC_PLLCFGR_Bits;
 
 
 #endif/* RCC_PRIVATE_H_*/

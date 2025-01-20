@@ -5,8 +5,8 @@
 #include "RCC_private.h"
 
 /*****************************MACROS*********************************/
-#define	RCC_enumCLK_NOTRDY           (0xFFFBFFFF)
-#define RCC_enumCLK_RDY              (0xFFFFFFFF)
+#define	RCC_CLK_NOTRDY           (0x00)
+#define RCC_CLK_RDY              (0x01)
 
 
 #define RCC_APB1_PRE_DIV2	         (0x00001000) 
@@ -110,10 +110,11 @@ typedef struct{
  */
 #define RCC ((RCC_strREG_type *)(RCC_BASE))
 
-/**************************************
- * Enumerations
- ***************************************
- */
+
+
+/****************************************************
+ ************** Enumerations ************************
+ *****************************************************/
 
 
 /**
