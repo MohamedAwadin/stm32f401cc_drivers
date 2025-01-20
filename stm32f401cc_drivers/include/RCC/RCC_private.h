@@ -3,6 +3,16 @@
 
 #define RCC_BASE 0x40023800U
 
+// Register identifiers (upper 32 bits)
+#define    RCC_AHB1ENR_REG  (0x0000000100000000ULL) // AHB1ENR register
+#define    RCC_AHB2ENR_REG  (0x0000000200000000ULL) // AHB2ENR register
+#define    RCC_APB1ENR_REG  (0x0000000300000000ULL) // APB1ENR register
+#define    RCC_APB2ENR_REG  (0x0000000400000000ULL) // APB2ENR register
+/**************************************************************/
+
+
+
+/*************************Registers Musks********************************* */
 #define RCC_PLLON_CFGR_BITMUSK_  			(0x1000000)
 #define RCC_PLLRDY_CFGR_BITMUSK_ 			(0x2000000)
 #define RCC_PLLSRC_PLLCFGR_BITMUSK_ 		(0x400000)
@@ -25,17 +35,17 @@
 #define RCC_SWS_CFGR_BITMUSK_				(0x0000000C)
 
 
-
+/******************************************************************** */
 
 #define RCC_PLL_N_MAX 			 432
 #define RCC_PLL_N_MIN 			 192
 
 #define RCC_PLL_M_MAX 			 63
 #define RCC_PLL_M_MIN 			 2
-#define RCC_u16TIME_OUT		((u16) 500)
+#define RCC_u16TIME_OUT		    (500)
 
-#define RCC_CFGR_SW01_SHIFT	  0x3				
-#define RCC_CFGR_SW_SHIFT	  0x1				
+#define RCC_CFGR_SW01_SHIFT	  	0x3				
+#define RCC_CFGR_SW_SHIFT	  	0x1				
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *		Clock control register (RCC_CR_) PINS			   *
