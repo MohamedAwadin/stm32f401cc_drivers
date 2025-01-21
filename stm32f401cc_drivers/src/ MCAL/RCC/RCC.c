@@ -1,10 +1,11 @@
 
 
-#include "../../include/COMMON/Utils.h"
-#include "../../include/COMMON/StdTypes.h"
+#include "../../../include/COMMON/Utils.h"
+#include "../../../include/COMMON/StdTypes.h"
 
-#include "../../include/RCC/RCC_private.h"
-#include "../../include/RCC/RCC.h"
+
+#include "../../../include/MCAL/RCC/RCC.h"
+#include "../../../include/MCAL/RCC/RCC_private.h"
 
 RCC_enumErrorStatus_t RCC_enuControlSysClock(RCC_enumSetClk_Source_t Copy_enumSource)
 {
@@ -207,10 +208,10 @@ RCC_enumErrorStatus_t RCC_enuPLLConfig(RCC_strPLLConfig_t Copy_strPLLConfig_t)
     return Local_enumReturnError;
 }
 
-RCC_enumErrorStatus_t RCC_enuEnableClock(u64 Copy_u8peripheral)
+RCC_enumErrorStatus_t RCC_enuEnableClock(u64 Copy_u64peripheral)
 {
-    u32 Local_u32reg = (Copy_u8peripheral >> 32);
-    u32 Local_u32bit = (Copy_u8peripheral & 0xFFFFFFFF);
+    u32 Local_u32reg = (Copy_u64peripheral >> 32);
+    u32 Local_u32bit = (Copy_u64peripheral & 0xFFFFFFFF);
     u32 Local_u32TempReg;
     RCC_enumErrorStatus_t Local_enumReturnError = RCC_enumOk;
 
@@ -245,10 +246,10 @@ RCC_enumErrorStatus_t RCC_enuEnableClock(u64 Copy_u8peripheral)
     return Local_enumReturnError; // Return the correct error status
 }
 
-RCC_enumErrorStatus_t RCC_enuDisableClock(u64 Copy_u8peripheral)
+RCC_enumErrorStatus_t RCC_enuDisableClock(u64 Copy_u64peripheral)
 {
-    u32 Local_u32reg = (Copy_u8peripheral >> 32);
-    u32 Local_u32bit = (Copy_u8peripheral & 0xFFFFFFFF);
+    u32 Local_u32reg = (Copy_u64peripheral >> 32);
+    u32 Local_u32bit = (Copy_u64peripheral & 0xFFFFFFFF);
     u32 Local_u32TempReg;
     RCC_enumErrorStatus_t Local_enumReturnError = RCC_enumOk;
 

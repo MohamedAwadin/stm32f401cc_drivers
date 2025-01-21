@@ -1,7 +1,7 @@
 #ifndef RCC_H
 #define RCC_H
 
-#include "../COMMON/StdTypes.h"
+#include "../../COMMON/StdTypes.h"
 #include "RCC_private.h"
 
 /*****************************MACROS*********************************/
@@ -258,18 +258,18 @@ RCC_enumErrorStatus_t RCC_enuPLLConfig(RCC_strPLLConfig_t Copy_strPLLConfig_t);
 /**
  * @brief Enables the clock for a specific peripheral.
  * @details This function enables the clock for the specified peripheral by setting the corresponding bit in the appropriate clock enable register (AHB1ENR, AHB2ENR, APB1ENR, or APB2ENR).
- * @param Copy_u8peripheral A 64-bit value representing the peripheral to be enabled. The upper 32 bits specify the register, and the lower 32 bits specify the bit position.
+ * @param Copy_u64peripheral A 64-bit value representing the peripheral to be enabled. The upper 32 bits specify the register, and the lower 32 bits specify the bit position.
  * @return RCC_enumErrorStatus_t Returns `RCC_enumOk` if the clock is enabled successfully, or an error status if the register is invalid.
  */
-RCC_enumErrorStatus_t RCC_enuEnableClock(u64 Copy_u8peripheral);
+RCC_enumErrorStatus_t RCC_enuEnableClock(u64 Copy_u64peripheral);
 
 /**
  * @brief Disables the clock for a specific peripheral.
  * @details This function disables the clock for the specified peripheral by clearing the corresponding bit in the appropriate clock enable register (AHB1ENR, AHB2ENR, APB1ENR, or APB2ENR).
- * @param Copy_u8peripheral A 64-bit value representing the peripheral to be disabled. The upper 32 bits specify the register, and the lower 32 bits specify the bit position.
+ * @param Copy_u64peripheral A 64-bit value representing the peripheral to be disabled. The upper 32 bits specify the register, and the lower 32 bits specify the bit position.
  * @return RCC_enumErrorStatus_t Returns `RCC_enumOk` if the clock is disabled successfully, or an error status if the register is invalid.
  */
-RCC_enumErrorStatus_t RCC_enuDisableClock(u64 Copy_u8peripheral);
+RCC_enumErrorStatus_t RCC_enuDisableClock(u64 Copy_u64peripheral);
 
 /**
  * @brief Retrieves the ready status of a specific clock source (HSI, HSE, or PLL).
