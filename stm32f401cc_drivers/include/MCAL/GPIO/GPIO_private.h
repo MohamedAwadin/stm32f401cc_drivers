@@ -28,6 +28,17 @@ typedef struct {
     volatile u32 AFR[2];   // Alternate function registers (AFRL and AFRH)
 } GPIO_strRegMap_t;
 
+
+/* Array of pointers to GPIO register structures */
+static GPIO_strRegMap_t *const GPIO_PORTS[] = {
+    (GPIO_strRegMap_t *)(GPIOA_BASE),  // GPIO_PORTA
+    (GPIO_strRegMap_t *)(GPIOB_BASE),  // GPIO_PORTB
+    (GPIO_strRegMap_t *)(GPIOC_BASE),  // GPIO_PORTC
+    (GPIO_strRegMap_t *)(GPIOD_BASE),  // GPIO_PORTD
+    (GPIO_strRegMap_t *)(GPIOE_BASE),  // GPIO_PORTE
+    (GPIO_strRegMap_t *)(GPIOH_BASE)   // GPIO_PORTH
+};
+
 /* ***********************GPIO Register BIT_MASKS*********************** */
 
 #define GPIO_CLRMODE_MODERx_BITMASK_          (u32)(0xFFFFFFFC)

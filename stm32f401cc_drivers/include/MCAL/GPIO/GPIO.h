@@ -5,44 +5,18 @@
 #include "GPIO_private.h"
 
 
+/************************************************************* */
+
 /*************************MACROS - GPIO Ports*************************/
 /**
- * @def GPIOA
- * @brief Macro to access the GPIOA registers.
+ * User-facing macros to represent GPIO ports
  */
-#define GPIOA ((GPIO_strRegMap_t *)(GPIOA_BASE))
-
-/**
- * @def GPIOB
- * @brief Macro to access the GPIOB registers.
- */
-#define GPIOB ((GPIO_strRegMap_t *)(GPIOB_BASE))
-
-/**
- * @def GPIOC
- * @brief Macro to access the GPIOC registers.
- */
-#define GPIOC ((GPIO_strRegMap_t *)(GPIOC_BASE))
-
-/**
- * @def GPIOD
- * @brief Macro to access the GPIOD registers.
- */
-#define GPIOD ((GPIO_strRegMap_t *)(GPIOD_BASE))
-
-/**
- * @def GPIOE
- * @brief Macro to access the GPIOE registers.
- */
-#define GPIOE ((GPIO_strRegMap_t *)(GPIOE_BASE))
-
-
-/**
- * @def GPIOH
- * @brief Macro to access the GPIOH registers.
- */
-#define GPIOH ((GPIO_strRegMap_t *)(GPIOH_BASE))
-/************************************************************* */
+#define GPIO_PORTA      (0)
+#define GPIO_PORTB      (1)
+#define GPIO_PORTC      (2)
+#define GPIO_PORTD      (3)
+#define GPIO_PORTE      (4)
+#define GPIO_PORTH      (5)
 
 /******************ENUM - ERRORS return type********************/
 
@@ -139,7 +113,7 @@ typedef enum{
   */
 typedef struct 
 {
-    volatile void *GPIO_pinPort;        /*< Pointer to the GPIO port (GPIOA, GPIOB, GPIOC, GPIOD, GPIOE, GPIOH) */
+    volatile u32 GPIO_pinPort;          /*< GPIO_pinPort value (GPIO_PORTA, GPIO_PORTB, GPIO_PORTC, GPIO_PORTD, GPIO_PORTE, GPIO_PORTH) */
     volatile u32 GPIO_pinNum;           /*< GPIO_pinNum (GPIO_PIN0 to GPIO_PIN15) */
     volatile u32 GPIO_pinMode;          /*< GPIO pin mode:
                                             - GPIO_MODE_INPUT
@@ -192,21 +166,21 @@ extern GPIO_enumErrorStatus_t GPIO_enumConfigPin(GPIO_strPinConfig_t *Add_pstrPi
 /**
  * @brief Sets the value of a GPIO OutPut pin (high or low).
  * 
- * @param Add_vGPIO_x Pointer to the GPIO port (GPIOA, GPIOB, GPIOC, GPIOD, GPIOE, GPIOH).
+ * @param Copy_u32pin_port GPIO_pinPort value (GPIO_PORTA, GPIO_PORTB, GPIO_PORTC, GPIO_PORTD, GPIO_PORTE, GPIO_PORTH)
  * @param Copy_u32pinNum Pin number (GPIO_PIN0 to GPIO_PIN15).
  * @param Copy_u32PinState Pin state (`GPIO_SET_PIN_HIGH` or `GPIO_SET_PIN_LOW`).
  * @return GPIO_enumErrorStatus_t Returns `GPIO_enumOK` if successful, or an error code if failed.
  */
-extern GPIO_enumErrorStatus_t GPIO_enumSetPinValue(void *Add_vGPIO_x, u32 Copy_u32pinNum,  u32 Copy_u32PinState);
+extern GPIO_enumErrorStatus_t GPIO_enumSetPinValue(u32 Copy_u32pin_port, u32 Copy_u32pinNum,  u32 Copy_u32PinState);
 /**
  * @brief Reads the value of a GPIO INPUT pin.
  * 
- * @param Add_vGPIO_x Pointer to the GPIO port (GPIOA, GPIOB, GPIOC, GPIOD, GPIOE, GPIOH)..
+ * @param Copy_u32pin_port GPIO_pinPort value (GPIO_PORTA, GPIO_PORTB, GPIO_PORTC, GPIO_PORTD, GPIO_PORTE, GPIO_PORTH)
  * @param Copy_u32pinNum Pin number (GPIO_PIN0 to GPIO_PIN15).
  * @param Add_pu32PinState Pointer to store the pin state (0(LOW) or 1(HIGH)).
  * @return GPIO_enumErrorStatus_t Returns `GPIO_enumOK` if successful, or an error code if failed.
  */
-extern GPIO_enumErrorStatus_t GPIO_enumGetPinValue(void *Add_vGPIO_x, u32 Copy_u32pinNum,  u32* Add_pu32PinState);
+extern GPIO_enumErrorStatus_t GPIO_enumGetPinValue(u32 Copy_u32pin_port, u32 Copy_u32pinNum,  u32* Add_pu32PinState);
 
 
 

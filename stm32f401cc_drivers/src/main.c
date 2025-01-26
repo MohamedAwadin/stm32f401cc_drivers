@@ -3,11 +3,11 @@
 #include "MCAL/GPIO/GPIO.h"
 
 
-#define LED_PORT    GPIOA
+#define LED_PORT    GPIO_PORTB
 #define LED_PIN     GPIO_PIN5
 
 
-#define BUTTON_PORT GPIOC
+#define BUTTON_PORT GPIO_PORTC
 #define BUTTON_PIN  GPIO_PIN13
 
 
@@ -21,7 +21,7 @@ int main(void)
 
     RCC_enuSetClock_Status(RCC_enumHSI_CLOCK , RCC_enumCLK_ON);
     RCC_enuControlSysClock(RCC_enumHSI_CLOCK);
-    RCC_enuEnableClock(RCC_AHB1ENR_GPIOAEN); 
+    RCC_enuEnableClock(RCC_AHB1ENR_GPIOBEN); 
     RCC_enuEnableClock(RCC_AHB1ENR_GPIOCEN); 
 
     
@@ -83,3 +83,5 @@ int main(void)
 
     return 0;
 }
+
+
