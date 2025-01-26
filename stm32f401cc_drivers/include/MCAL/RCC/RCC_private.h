@@ -14,18 +14,18 @@
 
 
 
-/*************************Registers Musks********************************* */
-#define RCC_PLLON_CFGR_BITMUSK_  			(0x1000000)
-#define RCC_PLLRDY_CFGR_BITMUSK_ 			(0x2000000)
-#define RCC_PLLSRC_PLLCFGR_BITMUSK_ 		(0x400000)
+/*************************Registers Masks********************************* */
+#define RCC_PLLON_CFGR_BITMASK_  			(0x1000000)
+#define RCC_PLLRDY_CFGR_BITMASK_ 			(0x2000000)
+#define RCC_PLLSRC_PLLCFGR_BITMASK_ 		(0x400000)
 
 
-#define RCC_HSION_CR_BITMUSK_				(0x00000001)
-#define RCC_HSIRDY_CR_BITMUSK_				(0x00000002)
-#define RCC_HSEON_CR_BITMUSK_				(0x00010000)
-#define RCC_HSERDY_CR_BITMUSK_				(0x00020000)
-#define RCC_PLLON_CR_BITMUSK_				(0x01000000)
-#define RCC_PLLRDY_CR_BITMUSK_				(0x02000000)
+#define RCC_HSION_CR_BITMASK_				(0x00000001)
+#define RCC_HSIRDY_CR_BITMASK_				(0x00000002)
+#define RCC_HSEON_CR_BITMASK_				(0x00010000)
+#define RCC_HSERDY_CR_BITMASK_				(0x00020000)
+#define RCC_PLLON_CR_BITMASK_				(0x01000000)
+#define RCC_PLLRDY_CR_BITMASK_				(0x02000000)
 
 #define RCC_APB1_CFGR_BITMASK_	            (0X00001C00) 
 #define RCC_APB2_CFGR_BITMASK_	            (0x0000E000) 
@@ -33,8 +33,8 @@
 #define RCC_HSEBYP_CR_BITMASK_	            (0x00040000) 
 
 
-#define RCC_RSTSW_CFGR_BITMUSK_		        (0xFFFFFFFC)
-#define RCC_SWS_CFGR_BITMUSK_				(0x0000000C)
+#define RCC_RSTSW_CFGR_BITMASK_		        (0xFFFFFFFC)
+#define RCC_SWS_CFGR_BITMASK_				(0x0000000C)
 
 
 /******************************************************************** */
