@@ -12,6 +12,7 @@ GPIO_enumErrorStatus_t GPIO_enumConfigPin(GPIO_strPinConfig_t *Add_pstrPinConfig
     GPIO_enumErrorStatus_t Local_enumErrorRet = GPIO_enumOK;
     u32 Local_u32TempReg;
     GPIO_strRegMap_t *Local_GPIO_Port;
+    
 
 
     // Check if the configuration pointer is NULL
@@ -19,15 +20,9 @@ GPIO_enumErrorStatus_t GPIO_enumConfigPin(GPIO_strPinConfig_t *Add_pstrPinConfig
     {
         Local_enumErrorRet = GPIO_enumErrorNullPointer;
     }
-    else if (Add_pstrPinConfig->GPIO_pinPort == NULL_PTR)
+    else if(Add_pstrPinConfig->GPIO_pinPort >= (sizeof(GPIO_PORTS) / sizeof(GPIO_PORTS[GPIO_PORTA])))
     {
-        Local_enumErrorRet = GPIO_enumErrorNullPointer;
-    }
-    else if ((Add_pstrPinConfig->GPIO_pinPort != GPIOA) && (Add_pstrPinConfig->GPIO_pinPort != GPIOB) &&
-             (Add_pstrPinConfig->GPIO_pinPort != GPIOC) && (Add_pstrPinConfig->GPIO_pinPort != GPIOD) &&
-             (Add_pstrPinConfig->GPIO_pinPort != GPIOE) && (Add_pstrPinConfig->GPIO_pinPort != GPIOH))
-    {
-        Local_enumErrorRet = GPIO_enumErrorPort;
+        return GPIO_enumErrorPort;
     }
     else if ((Add_pstrPinConfig->GPIO_pinNum < GPIO_PIN0) || (Add_pstrPinConfig->GPIO_pinNum > GPIO_PIN15))
     {
@@ -55,8 +50,8 @@ GPIO_enumErrorStatus_t GPIO_enumConfigPin(GPIO_strPinConfig_t *Add_pstrPinConfig
     }
     else
     {
-        // Cast the void pointer to GPIO_strRegMap_t*
-        Local_GPIO_Port = (GPIO_strRegMap_t *)Add_pstrPinConfig->GPIO_pinPort;
+        
+        Local_GPIO_Port = GPIO_PORTS[Add_pstrPinConfig->GPIO_pinPort];
         
         // Configure the pin mode
         Local_u32TempReg = Local_GPIO_Port->MODER;
@@ -105,24 +100,15 @@ GPIO_enumErrorStatus_t GPIO_enumConfigPin(GPIO_strPinConfig_t *Add_pstrPinConfig
     return Local_enumErrorRet;
 }
 
-GPIO_enumErrorStatus_t GPIO_enumSetPinValue(void *Add_vGPIO_x, u32 Copy_u32pinNum,  u32 Copy_u32PinState)
+GPIO_enumErrorStatus_t GPIO_enumSetPinValue(u32 Copy_u32pin_port, u32 Copy_u32pinNum,  u32 Copy_u32PinState)
 {
     GPIO_enumErrorStatus_t Local_enumErrorRet = GPIO_enumOK;
     GPIO_strRegMap_t *Local_GPIO_Port;
-    Local_GPIO_Port = (GPIO_strRegMap_t *)Add_vGPIO_x;
+    Local_GPIO_Port = GPIO_PORTS[Copy_u32pin_port];   
 
-
-
-    // Check if the configuration pointer is NULL
-    if (Add_vGPIO_x == NULL_PTR)
+    if( Copy_u32pin_port >= (sizeof(GPIO_PORTS) / sizeof(GPIO_PORTS[GPIO_PORTA])))
     {
-        Local_enumErrorRet = GPIO_enumErrorNullPointer;
-    }
-    else if ((Add_vGPIO_x != GPIOA) && (Add_vGPIO_x != GPIOB) &&
-             (Add_vGPIO_x != GPIOC) && (Add_vGPIO_x != GPIOD) &&
-             (Add_vGPIO_x != GPIOE) && (Add_vGPIO_x != GPIOH))
-    {
-        Local_enumErrorRet = GPIO_enumErrorPort;
+        return GPIO_enumErrorPort;
     }
     else if ((Copy_u32pinNum < GPIO_PIN0) || (Copy_u32pinNum > GPIO_PIN15))
     {
@@ -140,7 +126,6 @@ GPIO_enumErrorStatus_t GPIO_enumSetPinValue(void *Add_vGPIO_x, u32 Copy_u32pinNu
     else
     {
         
-    
         // Set or reset the pin using the BSRR register
         if (Copy_u32PinState == GPIO_SET_PIN_HIGH)
         {
@@ -157,25 +142,19 @@ GPIO_enumErrorStatus_t GPIO_enumSetPinValue(void *Add_vGPIO_x, u32 Copy_u32pinNu
     return Local_enumErrorRet;
 }
 
-GPIO_enumErrorStatus_t GPIO_enumGetPinValue(void *Add_vGPIO_x, u32 Copy_u32pinNum,  u32* Add_pu32PinState)
+GPIO_enumErrorStatus_t GPIO_enumGetPinValue(u32 Copy_u32pin_port, u32 Copy_u32pinNum,  u32* Add_pu32PinState)
 {
     GPIO_enumErrorStatus_t Local_enumErrorRet = GPIO_enumOK;
     GPIO_strRegMap_t *Local_GPIO_Port;
-    Local_GPIO_Port = (GPIO_strRegMap_t *)Add_vGPIO_x;
+    Local_GPIO_Port = GPIO_PORTS[Copy_u32pin_port];  
     
-    if (Add_vGPIO_x == NULL_PTR)
+    if (Add_pu32PinState == NULL_PTR)
     {
         Local_enumErrorRet = GPIO_enumErrorNullPointer;
     }
-    else if (Add_pu32PinState == NULL_PTR)
+    else if( Copy_u32pin_port >= (sizeof(GPIO_PORTS) / sizeof(GPIO_PORTS[GPIO_PORTA])))
     {
-        Local_enumErrorRet = GPIO_enumErrorNullPointer;
-    }
-    else if ((Add_vGPIO_x != GPIOA) && (Add_vGPIO_x != GPIOB) &&
-             (Add_vGPIO_x != GPIOC) && (Add_vGPIO_x != GPIOD) &&
-             (Add_vGPIO_x != GPIOE) && (Add_vGPIO_x != GPIOH))
-    {
-        Local_enumErrorRet = GPIO_enumErrorPort;
+        return GPIO_enumErrorPort;
     }
     else if ((Copy_u32pinNum < GPIO_PIN0) || (Copy_u32pinNum > GPIO_PIN15))
     {
@@ -187,6 +166,7 @@ GPIO_enumErrorStatus_t GPIO_enumGetPinValue(void *Add_vGPIO_x, u32 Copy_u32pinNu
     }
     else
     {
+         
         *Add_pu32PinState = (Local_GPIO_Port->IDR >> Copy_u32pinNum) & (GPIO_GETBITV_IDRx_BITMASK_); 
         Local_enumErrorRet = GPIO_enumOK;
     }
