@@ -5,8 +5,8 @@
 #include "RCC_private.h"
 
 /*****************************MACROS*********************************/
-#define	RCC_CLK_NOTRDY           (0x00)
-#define RCC_CLK_RDY              (0x01)
+#define	RCC_CLK_NOTRDY           	 (0x00)
+#define RCC_CLK_RDY              	 (0x01)
 
 
 #define RCC_APB1_PRE_DIV2	         (0x00001000) 
@@ -29,43 +29,43 @@
 #define RCC_AHB_PRE_DIV512	         (0x000000F0)	
 
 
-// Peripheral bits (lower 32 bits) musks
-#define    RCC_AHB1ENR_GPIOAEN  (RCC_AHB1ENR_REG | 0x00000001)  // GPIOA clock enable
-#define    RCC_AHB1ENR_GPIOBEN  (RCC_AHB1ENR_REG | 0x00000002)  // GPIOB clock enable
-#define    RCC_AHB1ENR_GPIOCEN  (RCC_AHB1ENR_REG | 0x00000004)  // GPIOC clock enable
-#define    RCC_AHB1ENR_GPIODEN  (RCC_AHB1ENR_REG | 0x00000008)  // GPIOD clock enable
-#define    RCC_AHB1ENR_GPIOEEN  (RCC_AHB1ENR_REG | 0x00000010)  // GPIOE clock enable
-#define    RCC_AHB1ENR_GPIOHEN  (RCC_AHB1ENR_REG | 0x00000080)  // GPIOH clock enable
-#define    RCC_AHB1ENR_CRCEN    (RCC_AHB1ENR_REG | 0x00001000)  // CRC clock enable
-#define    RCC_AHB1ENR_DMA1EN   (RCC_AHB1ENR_REG | 0x00200000)  // DMA1 clock enable
-#define    RCC_AHB1ENR_DMA2EN   (RCC_AHB1ENR_REG | 0x00400000)  // DMA2 clock enable
+/* Peripheral bits (lower 32 bits) Masks*/
+#define    RCC_AHB1ENR_GPIOAEN  (RCC_AHB1ENR_REG | 0x00000001)  /* GPIOA clock enable  */
+#define    RCC_AHB1ENR_GPIOBEN  (RCC_AHB1ENR_REG | 0x00000002)  /* GPIOB clock enable  */
+#define    RCC_AHB1ENR_GPIOCEN  (RCC_AHB1ENR_REG | 0x00000004)  /* GPIOC clock enable  */
+#define    RCC_AHB1ENR_GPIODEN  (RCC_AHB1ENR_REG | 0x00000008)  /* GPIOD clock enable  */
+#define    RCC_AHB1ENR_GPIOEEN  (RCC_AHB1ENR_REG | 0x00000010)  /* GPIOE clock enable  */
+#define    RCC_AHB1ENR_GPIOHEN  (RCC_AHB1ENR_REG | 0x00000080)  /* GPIOH clock enable  */
+#define    RCC_AHB1ENR_CRCEN    (RCC_AHB1ENR_REG | 0x00001000)  /* CRC clock enable  */
+#define    RCC_AHB1ENR_DMA1EN   (RCC_AHB1ENR_REG | 0x00200000)  /* DMA1 clock enable  */
+#define    RCC_AHB1ENR_DMA2EN   (RCC_AHB1ENR_REG | 0x00400000)  /* DMA2 clock enable  */
 
-#define    RCC_AHB2ENR_OTGFSEN  (RCC_AHB2ENR_REG | 0x00000080)  // USB OTG FS clock enable
+#define    RCC_AHB2ENR_OTGFSEN  (RCC_AHB2ENR_REG | 0x00000080)  /* USB OTG FS clock enable*/
 
-#define    RCC_APB1ENR_TIM2EN    (RCC_APB1ENR_REG | 0x00000001)  // TIM2 clock enable
-#define    RCC_APB1ENR_TIM3EN    (RCC_APB1ENR_REG | 0x00000002)  // TIM3 clock enable
-#define    RCC_APB1ENR_TIM4EN    (RCC_APB1ENR_REG | 0x00000004)  // TIM4 clock enable
-#define    RCC_APB1ENR_TIM5EN    (RCC_APB1ENR_REG | 0x00000008)  // TIM5 clock enable
-#define    RCC_APB1ENR_WWDGEN    (RCC_APB1ENR_REG | 0x00000800)  // WWDG clock enable
-#define    RCC_APB1ENR_SPI2EN    (RCC_APB1ENR_REG | 0x00004000)  // SPI2 clock enable
-#define    RCC_APB1ENR_SPI3EN    (RCC_APB1ENR_REG | 0x00008000)  // SPI3 clock enable
-#define    RCC_APB1ENR_USART2EN  (RCC_APB1ENR_REG | 0x00020000)  // USART2 clock enable
-#define    RCC_APB1ENR_I2C1EN    (RCC_APB1ENR_REG | 0x00200000)  // I2C1 clock enable
-#define    RCC_APB1ENR_I2C2EN    (RCC_APB1ENR_REG | 0x00400000)  // I2C2 clock enable
-#define    RCC_APB1ENR_I2C3EN    (RCC_APB1ENR_REG | 0x00800000)  // I2C3 clock enable
-#define    RCC_APB1ENR_PWREN     (RCC_APB1ENR_REG | 0x10000000)  // PWR clock enable
+#define    RCC_APB1ENR_TIM2EN    (RCC_APB1ENR_REG | 0x00000001)  /* TIM2 clock enable*/
+#define    RCC_APB1ENR_TIM3EN    (RCC_APB1ENR_REG | 0x00000002)  /* TIM3 clock enable*/
+#define    RCC_APB1ENR_TIM4EN    (RCC_APB1ENR_REG | 0x00000004)  /* TIM4 clock enable*/
+#define    RCC_APB1ENR_TIM5EN    (RCC_APB1ENR_REG | 0x00000008)  /* TIM5 clock enable*/
+#define    RCC_APB1ENR_WWDGEN    (RCC_APB1ENR_REG | 0x00000800)  /* WWDG clock enable*/
+#define    RCC_APB1ENR_SPI2EN    (RCC_APB1ENR_REG | 0x00004000)  /* SPI2 clock enable*/
+#define    RCC_APB1ENR_SPI3EN    (RCC_APB1ENR_REG | 0x00008000)  /* SPI3 clock enable*/
+#define    RCC_APB1ENR_USART2EN  (RCC_APB1ENR_REG | 0x00020000)  /* USART2 clock enable*/
+#define    RCC_APB1ENR_I2C1EN    (RCC_APB1ENR_REG | 0x00200000)  /* I2C1 clock enable*/
+#define    RCC_APB1ENR_I2C2EN    (RCC_APB1ENR_REG | 0x00400000)  /* I2C2 clock enable*/
+#define    RCC_APB1ENR_I2C3EN    (RCC_APB1ENR_REG | 0x00800000)  /* I2C3 clock enable*/
+#define    RCC_APB1ENR_PWREN     (RCC_APB1ENR_REG | 0x10000000)  /* PWR clock enable*/
 
-#define    RCC_APB2ENR_TIM1EN    (RCC_APB2ENR_REG | 0x00000001)  // TIM1 clock enable
-#define    RCC_APB2ENR_USART1EN  (RCC_APB2ENR_REG | 0x00000010)  // USART1 clock enable
-#define    RCC_APB2ENR_USART6EN  (RCC_APB2ENR_REG | 0x00000020)  // USART6 clock enable
-#define    RCC_APB2ENR_ADC1EN    (RCC_APB2ENR_REG | 0x00000100)  // ADC1 clock enable
-#define    RCC_APB2ENR_SDIOEN    (RCC_APB2ENR_REG | 0x00000800)  // SDIO clock enable
-#define    RCC_APB2ENR_SPI1EN    (RCC_APB2ENR_REG | 0x00001000)  // SPI1 clock enable
-#define    RCC_APB2ENR_SPI4EN    (RCC_APB2ENR_REG | 0x00002000)  // SPI4 clock enable
-#define    RCC_APB2ENR_SYSCFGEN  (RCC_APB2ENR_REG | 0x00004000)  // SYSCFG clock enable
-#define    RCC_APB2ENR_TIM9EN    (RCC_APB2ENR_REG | 0x00010000)  // TIM9 clock enable
-#define    RCC_APB2ENR_TIM10EN   (RCC_APB2ENR_REG | 0x00020000)  // TIM10 clock enable
-#define    RCC_APB2ENR_TIM11EN   (RCC_APB2ENR_REG | 0x00040000)  // TIM11 clock enable
+#define    RCC_APB2ENR_TIM1EN    (RCC_APB2ENR_REG | 0x00000001)  /* TIM1 clock enable*/
+#define    RCC_APB2ENR_USART1EN  (RCC_APB2ENR_REG | 0x00000010)  /* USART1 clock enable*/
+#define    RCC_APB2ENR_USART6EN  (RCC_APB2ENR_REG | 0x00000020)  /* USART6 clock enable*/
+#define    RCC_APB2ENR_ADC1EN    (RCC_APB2ENR_REG | 0x00000100)  /* ADC1 clock enable*/
+#define    RCC_APB2ENR_SDIOEN    (RCC_APB2ENR_REG | 0x00000800)  /* SDIO clock enable*/
+#define    RCC_APB2ENR_SPI1EN    (RCC_APB2ENR_REG | 0x00001000)  /* SPI1 clock enable*/
+#define    RCC_APB2ENR_SPI4EN    (RCC_APB2ENR_REG | 0x00002000)  /* SPI4 clock enable*/
+#define    RCC_APB2ENR_SYSCFGEN  (RCC_APB2ENR_REG | 0x00004000)  /* SYSCFG clock enable*/
+#define    RCC_APB2ENR_TIM9EN    (RCC_APB2ENR_REG | 0x00010000)  /* TIM9 clock enable*/
+#define    RCC_APB2ENR_TIM10EN   (RCC_APB2ENR_REG | 0x00020000)  /* TIM10 clock enable*/
+#define    RCC_APB2ENR_TIM11EN   (RCC_APB2ENR_REG | 0x00040000)  /* TIM11 clock enable*/
 
 
 /************************************************************** */
@@ -231,7 +231,7 @@ typedef struct{
  *							- RCC_enumPLL_CLOCK  < PLL clock source
  * @return RCC_enumErrorStatus_t Returns `RCC_enumOk` if the clock switch is successful, or an error status if the switch fails.
  */
-RCC_enumErrorStatus_t RCC_enuControlSysClock(RCC_enumSetClk_Source_t Copy_enumSource);
+extern RCC_enumErrorStatus_t RCC_enuControlSysClock(RCC_enumSetClk_Source_t Copy_enumSource);
 
 /**
  * @brief Sets the status (ON/OFF) of a specific clock source (HSI, HSE, or PLL).
@@ -244,7 +244,7 @@ RCC_enumErrorStatus_t RCC_enuControlSysClock(RCC_enumSetClk_Source_t Copy_enumSo
  * @param Copy_enumStatus The desired clock status (`RCC_enumCLK_ON` or `RCC_enumCLK_OFF`).
  * @return RCC_enumErrorStatus_t Returns `RCC_enumOk` if the operation is successful, or an error status if it fails.
  */
-RCC_enumErrorStatus_t RCC_enuSetClock_Status(RCC_enumSetClk_Source_t Copy_enumSource, RCC_enumSetClk_Status_t Copy_enumStatus);
+extern RCC_enumErrorStatus_t RCC_enuSetClock_Status(RCC_enumSetClk_Source_t Copy_enumSource, RCC_enumSetClk_Status_t Copy_enumStatus);
 
 /**
  * @brief Configures the PLL (Phase-Locked Loop) with the specified parameters.
@@ -253,7 +253,7 @@ RCC_enumErrorStatus_t RCC_enuSetClock_Status(RCC_enumSetClk_Source_t Copy_enumSo
  * @param Copy_strPLLConfig_t A structure containing the PLL configuration parameters (M, N, P, Q factors, and clock source).
  * @return RCC_enumErrorStatus_t Returns `RCC_enumOk` if the PLL is configured successfully, or an error status if the configuration fails.
  */
-RCC_enumErrorStatus_t RCC_enuPLLConfig(RCC_strPLLConfig_t Copy_strPLLConfig_t);
+extern RCC_enumErrorStatus_t RCC_enuPLLConfig(RCC_strPLLConfig_t Copy_strPLLConfig_t);
 
 /**
  * @brief Enables the clock for a specific peripheral.
@@ -261,7 +261,7 @@ RCC_enumErrorStatus_t RCC_enuPLLConfig(RCC_strPLLConfig_t Copy_strPLLConfig_t);
  * @param Copy_u64peripheral A 64-bit value representing the peripheral to be enabled. The upper 32 bits specify the register, and the lower 32 bits specify the bit position.
  * @return RCC_enumErrorStatus_t Returns `RCC_enumOk` if the clock is enabled successfully, or an error status if the register is invalid.
  */
-RCC_enumErrorStatus_t RCC_enuEnableClock(u64 Copy_u64peripheral);
+extern RCC_enumErrorStatus_t RCC_enuEnableClock(u64 Copy_u64peripheral);
 
 /**
  * @brief Disables the clock for a specific peripheral.
@@ -269,7 +269,7 @@ RCC_enumErrorStatus_t RCC_enuEnableClock(u64 Copy_u64peripheral);
  * @param Copy_u64peripheral A 64-bit value representing the peripheral to be disabled. The upper 32 bits specify the register, and the lower 32 bits specify the bit position.
  * @return RCC_enumErrorStatus_t Returns `RCC_enumOk` if the clock is disabled successfully, or an error status if the register is invalid.
  */
-RCC_enumErrorStatus_t RCC_enuDisableClock(u64 Copy_u64peripheral);
+extern RCC_enumErrorStatus_t RCC_enuDisableClock(u64 Copy_u64peripheral);
 
 /**
  * @brief Retrieves the ready status of a specific clock source (HSI, HSE, or PLL).
@@ -282,7 +282,7 @@ RCC_enumErrorStatus_t RCC_enuDisableClock(u64 Copy_u64peripheral);
  * @param Add_pu8ReadyStatus A pointer to store the ready status (`RCC_enumCLK_RDY` or `RCC_enumCLK_NOTRDY`).
  * @return RCC_enumErrorStatus_t Returns `RCC_enumOk` if the status is retrieved successfully, or an error status if the operation fails.
  */
-RCC_enumErrorStatus_t RCC_enuGetClkReadyStatus(RCC_enumSetClk_Source_t Copy_enumSource, u8 *Add_pu8ReadyStatus);
+extern RCC_enumErrorStatus_t RCC_enuGetClkReadyStatus(RCC_enumSetClk_Source_t Copy_enumSource, u8 *Add_pu8ReadyStatus);
 
 /**
  * @brief Configures the prescaler for the low-speed APB1 bus.
@@ -295,7 +295,7 @@ RCC_enumErrorStatus_t RCC_enuGetClkReadyStatus(RCC_enumSetClk_Source_t Copy_enum
  * 								- RCC_APB1_PRE_DIV16
  * @return RCC_enumErrorStatus_t Returns `RCC_enumOk` if the prescaler is configured successfully, or an error status if the value is invalid.
  */
-RCC_enumErrorStatus_t RCC_enuConfigurePreScalarLowSpeedAPB(u32 Copy_u8APB1_Prescalar);
+extern RCC_enumErrorStatus_t RCC_enuConfigurePreScalarLowSpeedAPB(u32 Copy_u8APB1_Prescalar);
 
 /**
  * @brief Configures the prescaler for the high-speed APB2 bus.
@@ -308,7 +308,7 @@ RCC_enumErrorStatus_t RCC_enuConfigurePreScalarLowSpeedAPB(u32 Copy_u8APB1_Presc
  * 								- RCC_APB2_PRE_DIV16	
  * @return RCC_enumErrorStatus_t Returns `RCC_enumOk` if the prescaler is configured successfully, or an error status if the value is invalid.
  */
-RCC_enumErrorStatus_t RCC_enuConfigurePreScalarHighSpeedAPB(u32 Copy_u32APB2_Prescalar);
+extern RCC_enumErrorStatus_t RCC_enuConfigurePreScalarHighSpeedAPB(u32 Copy_u32APB2_Prescalar);
 
 /**
  * @brief Configures the prescaler for the AHB bus.
@@ -325,7 +325,7 @@ RCC_enumErrorStatus_t RCC_enuConfigurePreScalarHighSpeedAPB(u32 Copy_u32APB2_Pre
  *								-RCC_AHB_PRE_DIV512
  * @return RCC_enumErrorStatus_t Returns `RCC_enumOk` if the prescaler is configured successfully, or an error status if the value is invalid.
  */
-RCC_enumErrorStatus_t RCC_enuConfigurePreScalarAHB(u32 Copy_u32AHB_Prescalar);
+extern RCC_enumErrorStatus_t RCC_enuConfigurePreScalarAHB(u32 Copy_u32AHB_Prescalar);
 
 /**
  * @brief Sets the HSE (High-Speed External) clock bypass status.
@@ -334,7 +334,7 @@ RCC_enumErrorStatus_t RCC_enuConfigurePreScalarAHB(u32 Copy_u32AHB_Prescalar);
  * @param Copy_u32Bypass_status The bypass status to be set (`RCC_enumCLK_BYPASS_ON` or `RCC_enumCLK_BYPASS_OFF`).
  * @return RCC_enumErrorStatus_t Returns `RCC_enumOk` if the bypass status is set successfully, or an error status if the operation fails.
  */
-RCC_enumErrorStatus_t RCC_enuHES_BYPASS_Status(u32 Copy_u32Bypass_status);
+extern RCC_enumErrorStatus_t RCC_enuHES_BYPASS_Status(u32 Copy_u32Bypass_status);
 
 
 #endif /*RCC_H*/
