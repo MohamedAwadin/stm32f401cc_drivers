@@ -41,12 +41,15 @@ static GPIO_strRegMap_t *const GPIO_PORTS[] = {
 
 /* ***********************GPIO Register BIT_MASKS*********************** */
 
-#define GPIO_CLRMODE_MODERx_BITMASK_          (u32)(0xFFFFFFFC)
-#define GPIO_CLROTYPE_OTYPERx_BITMASK_        (u32)(0xFFFFFFFE)
-#define GPIO_CLROSPEED_OSPEEDRx_BITMASK_      (u32)(0xFFFFFFFC)
-#define GPIO_CLRPUPD_PUPDRx_BITMASK_          (u32)(0xFFFFFFFC)
-#define GPIO_CLRAF_AFRx_BITMASK_              (u32)(0xFFFFFFF0)
-#define GPIO_GETBITV_IDRx_BITMASK_            (u32)(0x00000001)
+
+#define GPIO_CLRMODE_MODERx_BITMASK_          (0x00000003UL)
+#define GPIO_CLROTYPE_OTYPERx_BITMASK_        (0x00000001UL)
+#define GPIO_CLROSPEED_OSPEEDRx_BITMASK_      (0x00000003UL)
+#define GPIO_CLRPUPD_PUPDRx_BITMASK_          (0x00000003UL)
+#define GPIO_CLRAF_AFRx_BITMASK_              (0x0000000FUL)
+#define GPIO_GETBITV_IDRx_BITMASK_            (0x00000001UL)
+#define GPIO_2BITS_SHIFT_                   (0x00000002UL)
+
 
 
 

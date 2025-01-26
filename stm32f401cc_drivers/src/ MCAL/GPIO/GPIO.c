@@ -55,25 +55,25 @@ GPIO_enumErrorStatus_t GPIO_enumConfigPin(GPIO_strPinConfig_t *Add_pstrPinConfig
         
         // Configure the pin mode
         Local_u32TempReg = Local_GPIO_Port->MODER;
-        Local_u32TempReg &= (GPIO_CLRMODE_MODERx_BITMASK_ << (Add_pstrPinConfig->GPIO_pinNum * 2));     /*Clear the mode bits*/
+        Local_u32TempReg &= ~(GPIO_CLRMODE_MODERx_BITMASK_ << (Add_pstrPinConfig->GPIO_pinNum * 2));     /*Clear the mode bits*/
         Local_u32TempReg |= (Add_pstrPinConfig->GPIO_pinMode << (Add_pstrPinConfig->GPIO_pinNum * 2)); /*Set the mode bits*/
         Local_GPIO_Port->MODER = Local_u32TempReg;
 
         // Configure the output type
         Local_u32TempReg = Local_GPIO_Port->OTYPER;
-        Local_u32TempReg &= (GPIO_CLROTYPE_OTYPERx_BITMASK_ << (Add_pstrPinConfig->GPIO_pinNum));      /* Clear the output type bit*/
+        Local_u32TempReg &= ~(GPIO_CLROTYPE_OTYPERx_BITMASK_ << (Add_pstrPinConfig->GPIO_pinNum));      /* Clear the output type bit*/
         Local_u32TempReg |= (Add_pstrPinConfig->GPIO_pinOutType << (Add_pstrPinConfig->GPIO_pinNum)); /*Set the output type bit*/
         Local_GPIO_Port->OTYPER = Local_u32TempReg;
 
         // Configure the output speed
         Local_u32TempReg = Local_GPIO_Port->OSPEEDR;
-        Local_u32TempReg &= (GPIO_CLROSPEED_OSPEEDRx_BITMASK_ << (Add_pstrPinConfig->GPIO_pinNum * 2));  /*Clear the speed bits*/
+        Local_u32TempReg &= ~(GPIO_CLROSPEED_OSPEEDRx_BITMASK_ << (Add_pstrPinConfig->GPIO_pinNum * 2));  /*Clear the speed bits*/
         Local_u32TempReg |= (Add_pstrPinConfig->GPIO_pinSpeed << (Add_pstrPinConfig->GPIO_pinNum * 2)); /*Set the speed bits*/
         Local_GPIO_Port->OSPEEDR = Local_u32TempReg;
 
         // Configure the pull-up/pull-down
         Local_u32TempReg = Local_GPIO_Port->PUPDR;
-        Local_u32TempReg &= (GPIO_CLRPUPD_PUPDRx_BITMASK_ << (Add_pstrPinConfig->GPIO_pinNum * 2));     /*Clear the pull bits*/
+        Local_u32TempReg &= ~(GPIO_CLRPUPD_PUPDRx_BITMASK_ << (Add_pstrPinConfig->GPIO_pinNum * 2));     /*Clear the pull bits*/
         Local_u32TempReg |= (Add_pstrPinConfig->GPIO_pinPull << (Add_pstrPinConfig->GPIO_pinNum * 2)); /*Set the pull bits*/
         Local_GPIO_Port->PUPDR = Local_u32TempReg;
 
@@ -83,14 +83,14 @@ GPIO_enumErrorStatus_t GPIO_enumConfigPin(GPIO_strPinConfig_t *Add_pstrPinConfig
             if (Add_pstrPinConfig->GPIO_pinNum < GPIO_PIN8)
             {
                 Local_u32TempReg = Local_GPIO_Port->AFR[0];
-                Local_u32TempReg &= (GPIO_CLRAF_AFRx_BITMASK_ << (Add_pstrPinConfig->GPIO_pinNum * 4));       /*Clear the AF bits*/
+                Local_u32TempReg &= ~(GPIO_CLRAF_AFRx_BITMASK_ << (Add_pstrPinConfig->GPIO_pinNum * 4));       /*Clear the AF bits*/
                 Local_u32TempReg |= (Add_pstrPinConfig->GPIO_pinAF << (Add_pstrPinConfig->GPIO_pinNum * 4)); /* Set the AF bits*/
                 Local_GPIO_Port->AFR[0] = Local_u32TempReg;
             }
             else
             {
                 Local_u32TempReg = Local_GPIO_Port->AFR[1];
-                Local_u32TempReg &= (GPIO_CLRAF_AFRx_BITMASK_ << ((Add_pstrPinConfig->GPIO_pinNum - 8) * 4));       /*Clear the AF bits*/
+                Local_u32TempReg &= ~(GPIO_CLRAF_AFRx_BITMASK_ << ((Add_pstrPinConfig->GPIO_pinNum - 8) * 4));       /*Clear the AF bits*/
                 Local_u32TempReg |= (Add_pstrPinConfig->GPIO_pinAF << ((Add_pstrPinConfig->GPIO_pinNum - 8) * 4)); /* Set the AF bits*/
                 Local_GPIO_Port->AFR[1] = Local_u32TempReg;
             }
@@ -118,7 +118,7 @@ GPIO_enumErrorStatus_t GPIO_enumSetPinValue(u32 Copy_u32pin_port, u32 Copy_u32pi
     {
         Local_enumErrorRet = GPIO_enumErrorPinState;
     }
-    else if ((((Local_GPIO_Port ->MODER)>>(Copy_u32pinNum * 2)) & (~GPIO_CLRMODE_MODERx_BITMASK_)) != GPIO_MODE_OUTPUT)
+    else if ((((Local_GPIO_Port ->MODER)>>(Copy_u32pinNum * 2)) & (GPIO_CLRMODE_MODERx_BITMASK_)) != GPIO_MODE_OUTPUT)
     {
         Local_enumErrorRet = GPIO_enumErrorPinMode;
     }
@@ -160,7 +160,7 @@ GPIO_enumErrorStatus_t GPIO_enumGetPinValue(u32 Copy_u32pin_port, u32 Copy_u32pi
     {
         Local_enumErrorRet = GPIO_enumErrorPinNum;
     }
-    else if ((((Local_GPIO_Port ->MODER)>>(Copy_u32pinNum * 2)) & (~GPIO_CLRMODE_MODERx_BITMASK_)) != GPIO_MODE_INPUT)
+    else if ((((Local_GPIO_Port ->MODER)>>(Copy_u32pinNum * 2)) & (GPIO_CLRMODE_MODERx_BITMASK_)) != GPIO_MODE_INPUT)
     {
         Local_enumErrorRet = GPIO_enumErrorPinMode;
     }
