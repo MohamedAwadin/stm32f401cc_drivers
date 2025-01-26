@@ -1,3 +1,5 @@
+#ifdef GPIO_TEST
+
 #include "COMMON/StdTypes.h"
 #include "MCAL/RCC/RCC.h"
 #include "MCAL/GPIO/GPIO.h"
@@ -83,5 +85,48 @@ int main(void)
 
     return 0;
 }
+#endif
 
+#ifdef HLED_TEST
+
+#include "COMMON/StdTypes.h"
+#include "MCAL/RCC/RCC.h"
+#include "HAL/HLED/HLED.h"
+#include "HAL/HLED/HLED_Config.h"
+
+
+int main(void) {
+    HLED_enumErrorState_t errorStatus;
+    RCC_enuSetClock_Status(RCC_enumHSE_CLOCK , RCC_enumCLK_ON);
+    RCC_enuControlSysClock(RCC_enumHSE_CLOCK);
+    RCC_enuEnableClock(RCC_AHB1ENR_GPIOAEN); 
+    RCC_enuEnableClock(RCC_AHB1ENR_GPIOCEN); 
+
+    /* Initialize the LED driver */
+    HLED_vInit();
+
+    
+    errorStatus = HLED_enuSetValue(LED_START, HLED_ON);
+    if (errorStatus != HLED_enumErrSt_OK) {
+        
+    }
+    errorStatus = HLED_enuSetValue(LED_STOP, HLED_ON);
+    if (errorStatus != HLED_enumErrSt_OK) {
+        
+    }
+    errorStatus = HLED_enuSetValue(LED_ALERT, HLED_ON);
+    if (errorStatus != HLED_enumErrSt_OK) {
+        
+    }
+
+    
+    
+
+    
+    while (1) {
+        
+    }
+}
+
+#endif
 
