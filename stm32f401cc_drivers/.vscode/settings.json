@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "rcc.h": "c"
+        "rcc.h": "c",
+        "systick.h": "c",
+        "hsced.h": "c",
+        "stdtypes.h": "c",
+        "systick_private.h": "c",
+        "gpio.h": "c"
     }
 }
