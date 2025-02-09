@@ -154,7 +154,7 @@ GPIO_enumErrorStatus_t GPIO_enumGetPinValue(u32 Copy_u32pin_port, u32 Copy_u32pi
     }
     else if( Copy_u32pin_port >= (sizeof(GPIO_PORTS) / sizeof(GPIO_PORTS[GPIO_PORTA])))
     {
-        return GPIO_enumErrorPort;
+        Local_enumErrorRet = GPIO_enumErrorPort;
     }
     else if ((Copy_u32pinNum < GPIO_PIN0) || (Copy_u32pinNum > GPIO_PIN15))
     {
