@@ -1,0 +1,13 @@
+#ifndef _USART_CONFIG_H_
+#define _USART_CONFIG_H_
+
+
+
+#define USART1_FREQ  16000000
+#define USART2_FREQ  16000000
+#define USART6_FREQ  16000000
+
+
+
+
+#endif 

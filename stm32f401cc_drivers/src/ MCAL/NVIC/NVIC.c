@@ -4,18 +4,24 @@
 #include "../../../include/MCAL/NVIC/NVIC.h"
 #include "../../../include/MCAL/NVIC/NVIC_private.h"
 
+
+#define EIGHT_BIT_SHIFT 8
+#define FOUR_BIT_SHIFT 4
+#define BYTE_MASK       0x000000FF
+#define BYTE            8U 
 NVIC_ErrorStatus_t NVIC_enumEnableIRQ(NVIC_enumIRQn_Type Copy_enuIRQn)
 {
-    NVIC_ErrorStatus_t Local_enumErrorRet = NVIC_enumOk;
+     NVIC_ErrorStatus_t Local_enumErrorRet = NVIC_enumOk;
     u8 Loc_u8RegNum = (u8)Copy_enuIRQn / NVIC_REGISTER_SIZE;
     u8 Loc_u8BitNum = (u8)Copy_enuIRQn % NVIC_REGISTER_SIZE;
 
-    if ((u8)Copy_enuIRQn > NVIC_IRQn_MAX)
+    if (Copy_enuIRQn >= NVIC_IRQn_MAX)
     {
         Local_enumErrorRet = NVIC_enumErrorIRQNumber;
     }
     else
     {
+        
         NVIC->ISER[Loc_u8RegNum] = (NVIC_SET_MASK << Loc_u8BitNum);
     }
 
@@ -28,7 +34,7 @@ NVIC_ErrorStatus_t NVIC_enumDisableIRQ(NVIC_enumIRQn_Type Copy_enuIRQn)
     u8 Loc_u8RegNum = (u8)Copy_enuIRQn / NVIC_REGISTER_SIZE;
     u8 Loc_u8BitNum = (u8)Copy_enuIRQn % NVIC_REGISTER_SIZE;
 
-    if ((u8)Copy_enuIRQn > NVIC_IRQn_MAX)
+    if (Copy_enuIRQn >= NVIC_IRQn_MAX)
     {
         Local_enumErrorRet = NVIC_enumErrorIRQNumber;
     }
@@ -46,7 +52,7 @@ NVIC_ErrorStatus_t NVIC_enumSetPendingIRQ(NVIC_enumIRQn_Type Copy_enuIRQn)
     u8 Loc_u8RegNum = (u8)Copy_enuIRQn / NVIC_REGISTER_SIZE;
     u8 Loc_u8BitNum = (u8)Copy_enuIRQn % NVIC_REGISTER_SIZE;
 
-    if ((u8)Copy_enuIRQn > NVIC_IRQn_MAX)
+    if (Copy_enuIRQn >= NVIC_IRQn_MAX)
     {
         Local_enumErrorRet = NVIC_enumErrorIRQNumber;
     }
@@ -64,7 +70,7 @@ NVIC_ErrorStatus_t NVIC_enumClearPendingIRQ(NVIC_enumIRQn_Type Copy_enuIRQn)
     u8 Loc_u8RegNum = (u8)Copy_enuIRQn / NVIC_REGISTER_SIZE;
     u8 Loc_u8BitNum = (u8)Copy_enuIRQn % NVIC_REGISTER_SIZE;
 
-    if ((u8)Copy_enuIRQn > NVIC_IRQn_MAX)
+    if (Copy_enuIRQn >= NVIC_IRQn_MAX)
     {
         Local_enumErrorRet = NVIC_enumErrorIRQNumber;
     }
@@ -86,34 +92,74 @@ NVIC_ErrorStatus_t NVIC_enumGetPendingIRQ(NVIC_enumIRQn_Type Copy_enuIRQn, u8 *A
     {
         Local_enumErrorRet = NVIC_enumErrorNullPointer;
     }
-    else if ((u8)Copy_enuIRQn > NVIC_IRQn_MAX)
+    else if ((u8)Copy_enuIRQn >= NVIC_IRQn_MAX)
     {
         Local_enumErrorRet = NVIC_enumErrorIRQNumber;
     }
     else
     {
-        *Add_pu8GetPendingStatus = READ_BIT(NVIC->ICPR[Loc_u8RegNum], Loc_u8BitNum);
+        
+		if (NVIC->ISPR[Loc_u8RegNum] & (NVIC_SET_MASK << Loc_u8BitNum))
+		{
+			
+			*Add_pu8GetPendingStatus = NVIC_u8PENDING_ON;
+		}
+		else
+		{
+			
+			*Add_pu8GetPendingStatus = NVIC_u8PENDING_OFF;
+		}
     }
 
     return Local_enumErrorRet;
 }
 
-NVIC_ErrorStatus_t NVIC_enumSetPriority(NVIC_enumIRQn_Type Copy_enuIRQn, u32 Copy_u32Priority)
+NVIC_ErrorStatus_t NVIC_enumSetPriority(NVIC_enumIRQn_Type Copy_enuIRQn, u32 Copy_u32SubPriorityGroup, u32 Copy_u32PreemptPriority, u32 Copy_u32SubPriority)
 {
     NVIC_ErrorStatus_t Local_enumErrorRet = NVIC_enumOk;
+    u8 Loc_u8Priority_RegNUM  =0 ;
+    u8 Loc_u8Priority_ByteNUM  =0  ;
+    u32 Loc_u32TempReg = 0 ;
 
-    if ((u32)Copy_enuIRQn < NVIC_IRQn_MAX)
+    
+    u8 Loc_u8SUBPriorityGroupNum = (u8)(((Copy_u32SubPriorityGroup>>8)&0x07)-0x03);
+
+    u8 Loc_u8PreemptPriorityNum = NVIC_PRIO_BITS - Loc_u8SUBPriorityGroupNum ;
+
+    u8 Loc_u8MaxSubPriority           = ((1U << Loc_u8SUBPriorityGroupNum) - 1 );
+    u8 Loc_u8MaxPreemptPriority       = ((1U <<Loc_u8PreemptPriorityNum) - 1 );
+
+    if (Copy_enuIRQn >= NVIC_IRQn_MAX)
     {
-
-        NVIC->IPR[Copy_enuIRQn] = Copy_u32Priority & NVIC_SET_PRIORITY_MASK;
+        Local_enumErrorRet = NVIC_enumErrorIRQNumber;
+    }
+    else if (Loc_u8SUBPriorityGroupNum + Loc_u8PreemptPriorityNum > NVIC_PRIO_BITS)
+    {
+        Local_enumErrorRet = NVIC_enumErrorSubPriorityGroup;
+    }
+    else if (Copy_u32SubPriority >Loc_u8MaxSubPriority )
+    {
+        Local_enumErrorRet = NVIC_enumErrorSubPriority ;
+    }
+    else if (Copy_u32PreemptPriority >Loc_u8MaxPreemptPriority )
+    {
+        Local_enumErrorRet = NVIC_enumErrorPreemptPriority ;
     }
     else
     {
-        Local_enumErrorRet = NVIC_enumErrorIRQNumber;
+        Loc_u8Priority_RegNUM   = Copy_enuIRQn  / 4  ;
+        Loc_u8Priority_ByteNUM  = Copy_enuIRQn  % 4  ;
+        Loc_u32TempReg =   NVIC->IPR[Loc_u8Priority_RegNUM] ;
+        Loc_u32TempReg &= ~(BYTE_MASK << Loc_u8Priority_ByteNUM);
+        Loc_u32TempReg |= ((((Copy_u32PreemptPriority<<Loc_u8SUBPriorityGroupNum)|(Copy_u32SubPriority))<<FOUR_BIT_SHIFT)<<(Loc_u8Priority_ByteNUM *8U ));
+        NVIC->IPR[Loc_u8Priority_RegNUM] |= Loc_u32TempReg;
+        
     }
 
     return Local_enumErrorRet;
 }
+
+
 
 NVIC_ErrorStatus_t NVIC_enumGetPriority(NVIC_enumIRQn_Type Copy_enuIRQn, u32 *Add_pu32GetPriority)
 {
@@ -123,14 +169,16 @@ NVIC_ErrorStatus_t NVIC_enumGetPriority(NVIC_enumIRQn_Type Copy_enuIRQn, u32 *Ad
     {
         Local_enumErrorRet = NVIC_enumErrorNullPointer;
     }
-    else if ((u32)Copy_enuIRQn < NVIC_IRQn_MAX)
+    else if (Copy_enuIRQn >= NVIC_IRQn_MAX)
     {
 
-        *Add_pu32GetPriority = NVIC->IPR[Copy_enuIRQn];
+        
+        Local_enumErrorRet = NVIC_enumErrorIRQNumber;
     }
     else
     {
-        Local_enumErrorRet = NVIC_enumErrorIRQNumber;
+        u8 Loc_u8Priority_RegNUM   = Copy_enuIRQn  / 4  ;
+        *Add_pu32GetPriority = NVIC->IPR[Loc_u8Priority_RegNUM];
     }
 
     return Local_enumErrorRet;
@@ -142,79 +190,56 @@ NVIC_ErrorStatus_t NVIC_enumGetActive(NVIC_enumIRQn_Type Copy_enuIRQn, u8 *Add_p
     u8 Loc_u8RegNum = (u8)Copy_enuIRQn / NVIC_REGISTER_SIZE;
     u8 Loc_u8BitNum = (u8)Copy_enuIRQn % NVIC_REGISTER_SIZE;
 
-    if ((u8)Copy_enuIRQn > NVIC_IRQn_MAX)
+    if (Copy_enuIRQn >= NVIC_IRQn_MAX)
     {
         Local_enumErrorRet = NVIC_enumErrorIRQNumber;
     }
+    else if(Add_pu8GetActiveStatus == NULL_PTR)
+    {
+        Local_enumErrorRet = NVIC_enumErrorNullPointer;
+    }
     else
     {
-        *Add_pu8GetActiveStatus = READ_BIT(NVIC->IABR[Loc_u8RegNum], Loc_u8BitNum);
+        
+		if (NVIC->IABR[Loc_u8RegNum] & (NVIC_SET_MASK << Loc_u8BitNum))
+		{
+			
+			*Add_pu8GetActiveStatus = NVIC_u8ACTIVE_;
+		}
+		else
+		{
+			
+			*Add_pu8GetActiveStatus = NVIC_u8NOTACTIVE_;
+		}
     }
 
     return Local_enumErrorRet;
 }
 
-NVIC_ErrorStatus_t NVIC_EncodePriority(u32 Copy_u32PriorityGroup, u32 Copy_u32PreemptPriority, u32 Copy_u32SubPriority, u32 *Add_pu8EncodedPriority)
+
+
+
+NVIC_ErrorStatus_t NVIC_SetSubPriorityGrouping(u32 Copy_u32PriorityGroup)
 {
     NVIC_ErrorStatus_t Local_enumErrorRet = NVIC_enumOk;
-
-    // Calculate the number of bits for PreemptPriority and SubPriority
-    u32 Local_u32PreemptPriorityBits = Copy_u32PriorityGroup;
-    u32 Local_u32SubPriorityBits = NVIC_PRIO_BITS - Copy_u32PriorityGroup; // Total priority bits = 4 (STM32F401CC)
-
-    // Validate PriorityGroup (0 to 7)
-    if (Copy_u32PriorityGroup > NVIC_PRIORITY_GROUP_MAX)
+    u32 Local_u32TempReg = 0 ;
+    if (Copy_u32PriorityGroup&SCB_AIRCR_PRIGROUP_VLD_MASK)
     {
-        Local_enumErrorRet = NVIC_enumErrorPriorityGroup;
-    }
-    else if (Copy_u32PreemptPriority >= (1 << Local_u32PreemptPriorityBits))
-    {
-        Local_enumErrorRet = NVIC_enumErrorPreemptPriority;
-    }
-    else if (Copy_u32SubPriority >= (1 << Local_u32SubPriorityBits))
-    {
-        Local_enumErrorRet = NVIC_enumErrorSubPriority;
+        Local_enumErrorRet = NVIC_enumErrorSubPriorityGroup;
     }
     else
     {
-        // Encode the priority
-        *Add_pu8EncodedPriority = (Copy_u32PreemptPriority << Local_u32SubPriorityBits) | Copy_u32SubPriority;
+        Local_u32TempReg  = SCB->AIRCR ;
+        Local_u32TempReg &=  SCB_AIRCR_VECTKEY_CLR_MASK;
+        Local_u32TempReg &=  SCB_AIRCR_PRIGROUP_CLR_MASK;
+        Local_u32TempReg |=  SCB_AIRCR_VECTKEY_MASK;
+        Local_u32TempReg |=  Copy_u32PriorityGroup;
+        SCB->AIRCR= Local_u32TempReg ;
+
+        
     }
 
     return Local_enumErrorRet;
 }
 
 
-
-
-
-NVIC_ErrorStatus_t NVIC_SetPriorityGrouping(u32 Copy_u32PriorityGroup)
-{
-    u32 Local_u32reg_value;
-
-    // Ensure Priority Group is within valid range (0-4)
-    if (Copy_u32PriorityGroup > NVIC_PRIORITY_GROUP_4)
-    {
-        return NVIC_enumErrorPriorityGroup;
-    }
-
-    // Read current AIRCR value
-    Local_u32reg_value = SCB->AIRCR;
-
-    // Clear VECTKEY and PRIGROUP fields
-    Local_u32reg_value &= ~((u32)(SCB_AIRCR_VECTKEY_Msk | SCB_AIRCR_PRIGROUP_Msk));
-
-    // Insert VECTKEY and new priority group
-    Local_u32reg_value |= (SCB_VECTKEY_MASK << SCB_AIRCR_VECTKEY_Pos) | (Copy_u32PriorityGroup & NVIC_PRIORITY_GROUP_MASK);
-
-    // Write to AIRCR register
-    SCB->AIRCR = Local_u32reg_value;
-
-    return NVIC_enumOk;
-}
-
-
-NVIC_ErrorStatus_t NVIC_GetPriorityGrouping(u32* Add_pu32PriorityGroup)
-{
-    return ((u32)((SCB->AIRCR & SCB_AIRCR_PRIGROUP_Msk) >> SCB_AIRCR_PRIGROUP_Pos));
-}

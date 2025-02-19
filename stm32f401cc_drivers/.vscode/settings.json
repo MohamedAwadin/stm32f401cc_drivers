@@ -5,6 +5,16 @@
         "hsced.h": "c",
         "stdtypes.h": "c",
         "systick_private.h": "c",
-        "gpio.h": "c"
-    }
+        "gpio.h": "c",
+        "*.conf": "bitbake",
+        "*.inc": "bitbake"
+    },
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}/sources/poky/bitbake/lib",
+        "${workspaceFolder}/sources/poky/meta/lib"
+    ],
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/sources/poky/bitbake/lib",
+        "${workspaceFolder}/sources/poky/meta/lib"
+    ]
 }
