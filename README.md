@@ -14,9 +14,7 @@ The project is organized into the following directories:
   - **`HAL/`**: Implementation of HAL drivers.
   - **`MCAL/`**: Implementation of MCAL drivers.
   - **`main.c`**: Main application code.
-- **`test/`**: Directory for unit tests.
-- **`lib/`**: Directory for project-specific libraries.
-- **`.vscode/`**: Configuration files for Visual Studio Code.
+
 - **`platformio.ini`**: PlatformIO project configuration file.
 
 ## Drivers Overview
@@ -29,6 +27,11 @@ The project is organized into the following directories:
 
 ### NVIC Driver(MCAL)
 
+
+### USART Driver (MCAL)
+
+
+### DMA Driver (MCAL)
 
 
 ### SYSTICK Driver(MCAL)
